@@ -1,0 +1,2 @@
+[console_scripts]
+timbre-analyze = timbre_analyze.cli:main

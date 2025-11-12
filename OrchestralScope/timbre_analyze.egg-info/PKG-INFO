@@ -1,0 +1,86 @@
+Metadata-Version: 2.4
+Name: timbre-analyze
+Version: 0.1.0
+Summary: Audio timbre segmentation, clustering, and visualization CLI
+Author: Outora
+License: MIT
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.23
+Requires-Dist: scipy>=1.10
+Requires-Dist: librosa>=0.10.1
+Requires-Dist: soundfile>=0.12
+Requires-Dist: scikit-learn>=1.3
+Requires-Dist: hmmlearn>=0.3.0
+Requires-Dist: umap-learn>=0.5.5
+Requires-Dist: pandas>=2.0
+Requires-Dist: matplotlib>=3.7
+Requires-Dist: seaborn>=0.12
+Requires-Dist: tqdm>=4.66
+Requires-Dist: numba>=0.58
+
+Timbre Analyze Toolset
+
+Overview: Command-line tool `timbre-analyze` for audio timbre segmentation, clustering, and visualization.
+
+Quick Start
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+Example Commands
+
+```bash
+timbre-analyze \
+  --in_dir /path/to/audio \
+  --sr 22050 \
+  --pre_emphasis 0.97 \
+  --frame 46ms --hop 10ms \
+  --features mfcc,delta,delta2,chroma,scflux \
+  --seg_method novelty \
+  --seg_kernel_gauss 3.0 \
+  --beat_sync on \
+  --min_seg_beats 2 \
+  --cluster_method gmm \
+  --k_policy auto \
+  --k_min 4 --k_max 12 \
+  --k_select bic \
+  --smooth hmm --hmm_selfbias 0.6 \
+  --label_scheme global \
+  --palette "A:#E53935,B:#FB8C00,C:#FDD835,D:#43A047,E:#1E88E5,F:#8E24AA,G:#6D4C41,H:#00ACC1" \
+  --seq_distance levenshtein \
+  --dist_distribution jsd \
+  --dist_markov frobenius \
+  --alpha 0.6 \
+  --embed umap --embed_dim 2 \
+  --out_dir /path/to/results
+```
+
+Directory Structure
+
+```
+mel/
+  timbre_analyze/
+    __init__.py
+    cli.py
+    io.py
+    audio.py
+    features.py
+    segmentation.py
+    clustering.py
+    smoothing.py
+    metrics.py
+    embedding.py
+    viz.py
+    palette.py
+    utils.py
+  tests/
+  README.md
+  requirements.txt
+  pyproject.toml
+```
+
+
